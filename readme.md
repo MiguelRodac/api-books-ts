@@ -103,7 +103,7 @@ Documentación Swagger: `http://localhost:3000/docs`
 - Todos los comentarios en inglés para legibilidad global.
 - Validadores con Zod para asegurar entradas limpias.
 - Jobs mantienen actualizado el campo `books_count` automáticamente (ejecuta cada medianoche).
-- Swagger provee documentación interactiva en `/docs`.
+- Swagger provee documentación interactiva en `/api-docs`.
 
 ---
 
