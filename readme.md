@@ -93,4 +93,3 @@ Swagger docs: `http://localhost:8000/docs`
 
 ## 📖 License
 MIT
-```
