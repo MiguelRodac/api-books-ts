@@ -1,0 +1,21 @@
+# Dependencias y builds
+node_modules/
+build/
+
+# Archivos de entorno y sensibles
+.env
+
+# Archivos de sistema y temporales
+.DS_Store
+npm-debug.log*
+*.log
+.cache/
+temp/
+
+# Archivos/scripts locales específicos
+.corre.bat
+.por-validar-contenido/
+
+# Configuraciones de IDEs/Editores
+.vscode/
+.idea/
