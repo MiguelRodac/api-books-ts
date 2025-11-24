@@ -94,9 +94,3 @@ Swagger docs: `http://localhost:8000/docs`
 ## 📖 License
 MIT
 ```
-
----
-
-## 🎯 Resultado
-- Swagger listo en `/docs` con anotaciones en tus rutas.  
-- README.md con instalación, configuración y endpoints documentados.  
