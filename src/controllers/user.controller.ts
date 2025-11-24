@@ -96,7 +96,7 @@ export class UserController {
       if (!parsed.success) {
         return responseHandler(res, {
           status: 422,
-          error: { message: "Validation failed", data: parsed.error },
+          error: { message: "Validation failed", data: parsed.error.message },
         });
       }
       const user = await serviceUser.update(
@@ -134,7 +134,7 @@ export class UserController {
           error: { message: "User not found" },
         });
       }
-      return responseHandler(res, { status: 204, message: "User deleted" });
+      return responseHandler(res, { status: 200, message: "User deleted" });
     } catch (error: any) {
       Logger.error("Error in UserController.destroy", error);
       throw new ApiError(500, "Error al eliminar el usuario", error.message);

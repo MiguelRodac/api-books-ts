@@ -34,10 +34,16 @@ export class AuthController {
         password: hashedPassword,
       });
 
+      const token = jwt.sign(
+        { id_user: user.id_user, email: user.email },
+        process.env.JWT_SECRET || "fallback_secret",
+        { expiresIn: "1h" }
+      );
+
       return responseHandler(res, {
         status: 201,
         message: "User registered successfully",
-        data: user,
+        data: { user, token },
       });
     } catch (error: any) {
       Logger.error("Error in AuthController.register", error);

@@ -3,6 +3,7 @@ import { Book } from "../config/entities/book.model";
 import { Author } from "../config/entities/author.model";
 import { Logger } from "../shared/utils/logger";
 import { BookCreateDTO } from "../shared/validators/book.validator";
+import { updateBooksCount } from "../config/jobs/authorsPublished.job";
 
 export class BookService {
   private entity = AppDataSource.getRepository(Book);
@@ -26,7 +27,10 @@ export class BookService {
    */
   async getById(id: number): Promise<Book | null> {
     try {
-      return await this.entity.findOne({ where: { id_book: id }, relations: ["author"] });
+      return await this.entity.findOne({
+        where: { id_book: id },
+        relations: ["author"],
+      });
     } catch (error) {
       Logger.error("Error in getById Book", error);
       throw error;
@@ -40,7 +44,9 @@ export class BookService {
   async create(data: BookCreateDTO): Promise<Book> {
     try {
       // Fetch the author relation
-      const author = await this.authorRepo.findOneBy({ id_author: data.id_author });
+      const author = await this.authorRepo.findOneBy({
+        id_author: data.id_author,
+      });
       if (!author) {
         throw new Error(`Author with ID ${data.id_author} not found`);
       }
@@ -53,6 +59,9 @@ export class BookService {
         available: data.available,
         author, // relation object
       });
+
+      // Update author's books count
+      await updateBooksCount(author.id_author);
 
       return await this.entity.save(book);
     } catch (error) {
@@ -73,7 +82,9 @@ export class BookService {
 
       // If author is being updated, fetch relation
       if (data.id_author) {
-        const author = await this.authorRepo.findOneBy({ id_author: data.id_author });
+        const author = await this.authorRepo.findOneBy({
+          id_author: data.id_author,
+        });
         if (!author) {
           throw new Error(`Author with ID ${data.id_author} not found`);
         }

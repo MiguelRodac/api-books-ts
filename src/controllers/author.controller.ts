@@ -69,7 +69,7 @@ export class AuthorController {
       if (!parsed.success) {
         return responseHandler(res, {
           status: 422,
-          error: { message: "Validation failed", data: parsed.error },
+          error: { message: "Validation failed", data: parsed.error.message },
         });
       }
       const author = await serviceAuthor.create(parsed.data);
@@ -96,7 +96,7 @@ export class AuthorController {
       if (!parsed.success) {
         return responseHandler(res, {
           status: 422,
-          error: { message: "Validation failed", data: parsed.error },
+          error: { message: "Validation failed", data: parsed.error.message },
         });
       }
       const author = await serviceAuthor.update(
@@ -134,7 +134,7 @@ export class AuthorController {
           error: { message: "Author not found" },
         });
       }
-      return responseHandler(res, { status: 204, message: "Author deleted" });
+      return responseHandler(res, { status: 200, message: "Author deleted" });
     } catch (error: any) {
       Logger.error("Error in AuthorController.destroy", error);
       throw new ApiError(500, "Error deleting author", error.message);

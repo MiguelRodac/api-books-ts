@@ -1,37 +1,21 @@
 import express from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
 import routes from "./routes/routes";
 import welcome from "./routes/welcome.routes";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { notFoundHandler } from "./shared/utils/handlers/notFoundHandler";
 import "./config/jobs/authorsPublished.job";
+import { swaggerDocument } from "./docs/swaggerDocs";
 
 // ===========================================
 //          Create Express App
 // ===========================================
 const app = express();
 // ===========================================
-//          Swagger Config
-// ===========================================
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "API Books",
-      version: "1.0.0",
-      description:
-        "API para gestionar libros y autor. Desarrollada con Node.js, Express y TypeScript.",
-    },
-  },
-  apis: ["./src/docs/swaggerDocs.ts"],
-};
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
-// ===========================================
 //          Swagger UI
 // ===========================================
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // ===========================================
 // Middlewares
 // ===========================================

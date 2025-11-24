@@ -69,7 +69,7 @@ export class BookController {
       if (!parsed.success) {
         return responseHandler(res, {
           status: 422,
-          error: { message: "Validation failed", data: parsed.error },
+          error: { message: "Validation failed", data: parsed.error.message },
         });
       }
       const book = await serviceBook.create(parsed.data);
@@ -96,7 +96,7 @@ export class BookController {
       if (!parsed.success) {
         return responseHandler(res, {
           status: 422,
-          error: { message: "Validation failed", data: parsed.error },
+          error: { message: "Validation failed", data: parsed.error.message },
         });
       }
       const book = await serviceBook.update(
@@ -134,7 +134,7 @@ export class BookController {
           error: { message: "Book not found" },
         });
       }
-      return responseHandler(res, { status: 204, message: "Book deleted" });
+      return responseHandler(res, { status: 200, message: "Book deleted" });
     } catch (error: any) {
       Logger.error("Error in BookController.destroy", error);
       throw new ApiError(500, "Error deleting book", error.message);
