@@ -1,4 +1,3 @@
-// src/utils/handlers/responseHandler.ts
 import { Response } from 'express';
 import { successHandler } from './successHandler';
 import { errorHandler, ApiError } from './errorHandler';
@@ -20,8 +19,6 @@ export const responseHandler = <T>(
     const hasData = serviceResponse.data !== undefined && serviceResponse.data !== null && Object.keys(serviceResponse.data).length > 0;
     const message = serviceResponse.message ? serviceResponse.message : hasData ? 'Data found' : 'No data found';
     const data = hasData ? serviceResponse.data : null;
-    
-    // console.log('DATA desde GENERAL HANDLER: ', data, 'HASDATA', hasData);
 
     return successHandler(res, data, message, serviceResponse.status);
   } else {

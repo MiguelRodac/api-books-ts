@@ -1,4 +1,3 @@
-// src/utils/handlers/successHandler.ts
 import { Response } from 'express';
 
 export const successHandler = (

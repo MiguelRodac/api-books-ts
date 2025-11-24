@@ -1,15 +1,19 @@
 import "dotenv/config";
 import app from "./app";
 import { Logger } from "./shared/utils/logger";
+import { AppDataSource } from "./config/db/db";
 
 const PORT = process.env.PORT || 3000;
 
 /**
- * Inicia el servidor y escucha en el puerto especificado.
+ * Start the server.
  */
 const start = async () => {
   try {
-    // await connectDB(); // Conectar a la base de datos
+    // Connect to the database
+    await AppDataSource.initialize();
+    Logger.info("📦 Database connected");
+
     app.listen(PORT, () => {
       Logger.info(`🚀 Server running on port ${PORT}`);
       Logger.info(`📚 API docs: http://localhost:${PORT}/api-docs`);
@@ -21,8 +25,8 @@ const start = async () => {
 };
 
 /**
- * Evento de cierre del servidor.
- * @param signal El símbolo del sinal que generó la detención del
+ * Event handler for SIGINT (Ctrl+C) signal.
+ * @param signal The signal received (SIGINT in this case).
  */
 process.on("SIGINT", () => {
   Logger.info("\n🔴 Server shutting down...");

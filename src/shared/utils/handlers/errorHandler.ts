@@ -1,5 +1,4 @@
-// src/utils/handlers/errorHandler.ts
-import { Response } from 'express';
+import { Response } from "express";
 
 export class ApiError extends Error {
   constructor(
@@ -16,6 +15,6 @@ export const errorHandler = (res: Response, error: ApiError) => {
     success: false,
     statusCode: error.statusCode,
     message: error.message,
-    data: error.errorData || 'Error details not available'
+    data: error.errorData,
   });
 };

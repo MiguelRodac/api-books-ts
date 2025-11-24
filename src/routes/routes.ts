@@ -4,6 +4,7 @@ import book from "./book.routes";
 import user from "./user.routes";
 import auth from "./auth.routes";
 import author from "./author.routes";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
 const router = Router();
 
@@ -48,8 +49,8 @@ router.get("/ping", (_req: any, res: any) => {
 //                  Routes
 // ===========================================
 router.use("/auth", auth);
-router.use("/authors", author);
-router.use("/books", book);
-router.use("/users", user);
+router.use("/authors", authMiddleware, author);
+router.use("/books", authMiddleware, book);
+router.use("/users", authMiddleware, user);
 
 export default router;
