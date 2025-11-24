@@ -14,6 +14,13 @@ Permite gestionar Autores, Libros y Usuarios con autenticación y tareas program
 
 ---
 
+## Diagrama de la base de datos
+
+El diagrama ER público está disponible en dbdiagram. Puedes explorarlo aquí:
+[API Books DB en dbdiagram](https://dbdiagram.io/d/API-Books-DB-6924ead3228c5bbc1a52f55e)
+
+---
+
 ## 📦 Instalación
 
 ```bash
